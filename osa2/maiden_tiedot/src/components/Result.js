@@ -7,7 +7,7 @@ const Result = ({ country }) => (
     <div>capital {country.capital}</div>
     <div>population {country.population}</div>
 
-    <h2>languages</h2>
+    <h2>Spoken languages</h2>
     <ul>
       {country.languages.map((language, i) =>
         <li key={i}>{language.name}</li>

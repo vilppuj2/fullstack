@@ -7,13 +7,13 @@ import Countries from './components/Countries'
 const App = () => {
   const [filter, setFilter] = useState('')
   const [countries, setCountries] = useState([])
+  const [weather, setWeather] = useState(null)
+  const api_key = process.env.REACT_APP_API_KEY
 
   useEffect(() => {
-    console.log('effect')
     axios
       .get('https://restcountries.eu/rest/v2/all')
       .then(response => {
-        console.log('promise fulfilled')
         setCountries(response.data)
       })
   }, [])
@@ -24,10 +24,24 @@ const App = () => {
     country.name.toLowerCase().includes(filter.toLowerCase())
   )
 
+  useEffect(() => {
+    if (filteredCountries.length === 1 && (weather === null || weather.location.name !== filteredCountries[0].capital)) {
+      const params = {
+        access_key: api_key,
+        query: filteredCountries[0].capital
+      }
+      axios
+      .get('http://api.weatherstack.com/current', {params})
+      .then(response => {
+        setWeather(response.data)
+      })
+    }
+  })
+
   return (
     <div>
       <Filter value={filter} onChange={handleFilterChange} />
-      <Countries filtered={filteredCountries} setFilter={setFilter} />
+      <Countries filtered={filteredCountries} setFilter={setFilter} weather={weather} />
     </div>
   )
 }

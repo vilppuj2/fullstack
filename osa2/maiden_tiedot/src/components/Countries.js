@@ -1,9 +1,10 @@
 import React from 'react'
 import Country from './Country'
 import Result from './Result'
+import Weather from './Weather'
 
 
-const Countries = ({ filtered, setFilter }) => {
+const Countries = ({ filtered, setFilter, weather }) => {
   const results = filtered.length
 
   if (results === 0) {
@@ -14,7 +15,10 @@ const Countries = ({ filtered, setFilter }) => {
 
   if (results === 1) {
     return (
-      <Result country={filtered[0]} />
+      <div>
+        <Result country={filtered[0]} />
+        <Weather weather={weather} />
+      </div>
     )
   }
 
