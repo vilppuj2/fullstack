@@ -53,12 +53,8 @@ blogsRouter.delete('/:id', async (request, response) => {
 
 blogsRouter.put('/:id', async (request, response) => {
   const body = request.body
-  // Tarvitsemme muokkausta lähinnä likejen lukumäärän päivittämiseen.
-  const blog = {
-    likes: body.likes
-  }
 
-  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, body, { new: true })
   response.json(updatedBlog.toJSON())
 })
 
