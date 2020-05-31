@@ -9,7 +9,7 @@ import './App.css'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('') 
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
@@ -93,7 +93,7 @@ const App = () => {
       name: user.name,
       username: user.username
     }
-    setBlogs(blogs.concat({ ...savedBlog, user: tempUser}))
+    setBlogs(blogs.concat({ ...savedBlog, user: tempUser }))
 
     setMessage(`a new blog ${savedBlog.title} by ${savedBlog.author} added`)
     setTimeout(() => {
@@ -115,7 +115,7 @@ const App = () => {
         <form onSubmit={handleLogin}>
           <div>
             username
-              <input
+            <input
               type="text"
               value={username}
               name="Username"
@@ -124,7 +124,7 @@ const App = () => {
           </div>
           <div>
             password
-              <input
+            <input
               type="password"
               value={password}
               name="Password"
