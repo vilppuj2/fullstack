@@ -12,7 +12,7 @@ const Blog = ({ blog, likeBlog, username, removeBlog }) => {
     if (username === blog.user.username) {
       return (
         <div>
-          <button onClick={removeBlog}>remove</button>
+          <button id="remove-button" onClick={removeBlog}>remove</button>
         </div>
       )
     }
@@ -26,7 +26,7 @@ const Blog = ({ blog, likeBlog, username, removeBlog }) => {
           {blog.url}
           <div>
             likes {blog.likes}
-            <button onClick={likeBlog}>like</button>
+            <button id="like-button" onClick={likeBlog}>like</button>
           </div>
           {blog.user.name}
           {removeButton()}
@@ -45,10 +45,10 @@ const Blog = ({ blog, likeBlog, username, removeBlog }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div id="blog" style={blogStyle}>
       <div>
         {blog.title} {blog.author}
-        <button onClick={toggleComplete}>{complete ? 'hide' : 'view'}</button>
+        <button id="view-button" onClick={toggleComplete}>{complete ? 'hide' : 'view'}</button>
       </div>
       {infoToShow()}
     </div>
