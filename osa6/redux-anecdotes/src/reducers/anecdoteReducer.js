@@ -19,9 +19,9 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
+const anecdoteReducer = (state = initialState, action) => {
   switch(action.type) {
-    case 'CREATE':
+    case 'CREATE_ANEC':
       return [...state, action.data]
 
     case 'VOTE':
@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
 
 export const createAnecdote = (content) => {
   return {
-    type: 'CREATE',
+    type: 'CREATE_ANEC',
     data: asObject(content)
   }
 }
@@ -55,4 +55,4 @@ export const voteFor = (id) => {
   }
 }
 
-export default reducer
+export default anecdoteReducer
