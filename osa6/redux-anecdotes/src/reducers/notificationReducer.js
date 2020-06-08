@@ -1,10 +1,19 @@
-const notificationReducer = (state = null, action) => {
+const initialState = {
+  content: null,
+  timeoutID: null
+}
+
+const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_NOTI':
-      return action.content
+      clearTimeout(state.timeoutID)
+      return {
+        content: action.data.content,
+        timeoutID: action.data.timeoutID
+      }
 
     case 'REMOVE_NOTI':
-      return null
+      return initialState
 
     default:
       return state
@@ -13,15 +22,16 @@ const notificationReducer = (state = null, action) => {
 
 export const setNotification = (content, time) => {
   return async dispatch => {
-    await dispatch({
-      type: 'SET_NOTI',
-      content
-    })
-    setTimeout(() => {
+    const timeoutID = setTimeout(() => {
       dispatch({
         type: 'REMOVE_NOTI'
       })
     }, time * 1000)
+
+    await dispatch({
+      type: 'SET_NOTI',
+      data: { content, timeoutID }
+    })
   }
 }
 
