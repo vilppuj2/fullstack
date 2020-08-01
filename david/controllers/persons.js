@@ -3,36 +3,7 @@ const personsRouter = require('express').Router()
 const { v4: uuidv4 } = require('uuid')
 
 
-// let persons = []
-let persons = [
-  {
-    id: 1,
-    uuid: '84f414a4-8ac8-4626-bedf-90104c682745',
-    customer_id: 1,
-    first_name: 'Pekka',
-    last_name: 'Aho',
-    role: 'customer',
-    is_deleted: true
-  },
-  {
-    id: 2,
-    uuid: '6df25165-e089-4704-bc93-22bde7a2cd86',
-    customer_id: 2,
-    first_name: 'Matti',
-    last_name: 'Meikäläinen',
-    role: 'visitor',
-    is_deleted: false
-  },
-  {
-    id: 3,
-    uuid: 'd4c0ee78-d8a8-4ba2-af35-0c0c2431ac2e',
-    customer_id: 3,
-    first_name: 'Kalle',
-    last_name: 'Kalle',
-    role: 'customer',
-    is_deleted: false
-  }
-]
+let persons = []
 
 const generateId = () => {
   const maxId = persons.length > 0
@@ -78,11 +49,11 @@ personsRouter.patch('/:id', (req, res) => {
   const updatedPer = {
     id: person.id,
     uuid: person.uuid,
-    customer_id: body.customer_id || person.customer_id,
+    customer_id: body.customer_id === undefined ? person.customer_id : body.customer_id,
     first_name: body.first_name || person.first_name,
     last_name: body.last_name || person.last_name,
     role: body.role || person.role,
-    is_deleted: body.is_deleted || person.is_deleted
+    is_deleted: body.is_deleted === undefined ? person.is_deleted : body.is_deleted
   }
 
   persons[index] = updatedPer

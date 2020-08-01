@@ -3,27 +3,7 @@ const customersRouter = require('express').Router()
 const { v4: uuidv4 } = require('uuid')
 
 
-// let customers = []
-let customers = [
-  {
-    id: 1,
-    uuid: '3b2a7066-7a14-486a-bf7a-35db9a3712eb',
-    name: 'Pekka Aho',
-    is_active: true
-  },
-  {
-    id: 2,
-    uuid: '97e1ef7f-d29c-4db8-a4ff-8c9d72c343d9',
-    name: 'Matti Meikäläinen',
-    is_active: false
-  },
-  {
-    id: 3,
-    uuid: 'be22f7f5-0355-4bb2-87f6-a8b7617ddc2b',
-    name: 'Kalle Kalle',
-    is_active: true
-  }
-]
+let customers = []
 
 const generateId = () => {
   const maxId = customers.length > 0
@@ -67,7 +47,7 @@ customersRouter.patch('/:id', (req, res) => {
     id: customer.id,
     uuid: customer.uuid,
     name: body.name || customer.name,
-    is_active: body.is_active || customer.is_active
+    is_active: body.is_active === undefined ? customer.is_active : body.is_active
   }
 
   customers[index] = updatedCus
