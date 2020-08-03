@@ -33,7 +33,7 @@ customersRouter.post('/', (req, res) => {
   }
 
   customers = customers.concat(customer)
-  res.json(customer)
+  res.status(201).json(customer)
 })
 
 customersRouter.patch('/:id', (req, res) => {

@@ -36,7 +36,7 @@ personsRouter.post('/', (req, res) => {
   }
 
   persons = persons.concat(person)
-  res.json(person)
+  res.status(201).json(person)
 })
 
 personsRouter.patch('/:id', (req, res) => {
